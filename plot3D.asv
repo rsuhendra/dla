@@ -1,0 +1,12 @@
+r=50;
+k=1;
+
+X=NaN(r^3)
+
+for i=1:r
+    for j=1:r
+        for k=1:r
+            
+        end
+    end
+end
