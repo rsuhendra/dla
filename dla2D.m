@@ -3,7 +3,7 @@ function [mass, A] = dla2D(rmin,k) % rmin = size of cluster, k = stickiness
     max_iter=50000; % maximum iterations before stopping 
 
     rmax=round(rmin*sqrt(d)); % rmax is death radius of particle
-
+    
     N=2*rmax+3; 
     A=zeros(N);
     m=ceil(N/2); % middle of grid

@@ -5,10 +5,11 @@ set(0,'defaultaxesfontsize',16,'defaultaxeslinewidth',1.5,...
     'defaultlinelinewidth',1.5,'defaultpatchlinewidth',1.5)
 clear
 
-radii=60:5:100; % radii to sample
+radii=50:5:100; % radii to sample
 k=1; % stickiness
 
 radii=cat(2,radii,radii); % sample each radius twice for robustness
+% radii=cat(2,radii,radii); % sample 4 times
 mass=zeros(size(radii));
 
 for j=1:length(radii)

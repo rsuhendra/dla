@@ -1,5 +1,5 @@
 function [mass, A] = dla3D(rmin,k) % rmin = size of cluster, k = stickiness
-    d=2; % volume of rmax sphere compared to rmin sphere
+    d=3; % volume of rmax sphere compared to rmin sphere
     max_iter=200000; % maximum iterations before stopping 
 
     rmax=round(rmin*(d^(1/3))); % rmax is death radius of particle
@@ -15,7 +15,7 @@ function [mass, A] = dla3D(rmin,k) % rmin = size of cluster, k = stickiness
     for j=1:max_iter
         d=rmin+2;
         theta=unifrnd(0,2*pi);
-        psi=unifrnd(0,pi);
+        psi=acos(1-2*rand);
         x=m+round(d*sin(psi)*cos(theta));
         y=m+round(d*sin(psi)*sin(theta));
         z=m+round(d*cos(psi));
@@ -23,11 +23,11 @@ function [mass, A] = dla3D(rmin,k) % rmin = size of cluster, k = stickiness
         A(x,y,z)=1;
 
         while 1
-            sum=A(x+1,y,z)+ A(x-1,y,z)+ A(x,y+1,z)+A(x,y-1,z)+...
-                A(x,y,z+1)+ A(x,y,z-1); % check if any neighbors
+            sum=A(x+1,y,z)+ A(x-1,y,z)+ A(x,y+1,z)+A(x,y-1,z)+A(x,y,z+1)+ A(x,y,z-1); % check if any neighbors
             if sum>0 && rand<k % if neighbors and it sticks, then move on to next particle
                 if (x-m)^2+(y-m)^2+(z-m)^2>= rmin^2 % check if any branch passed rmin
                     terminate=true; % if so, terminate program
+                    fprintf('x=%i,y=%i,z=%i\n',x-m,y-m,z-m);
                 end
                 mass=mass+1;
                 break
